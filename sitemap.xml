@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/valineerr/</loc>
+    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/01-valineerr/</loc>
+    
+    <lastmod>2020-07-17T10:07:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/02-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2020-07-17T10:07:00.000Z</lastmod>
     
@@ -54,20 +61,6 @@
     <loc>http://leahzheng.gitee.io/leah_blog/categories/index.html</loc>
     
     <lastmod>2020-07-16T07:47:38.486Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/16/my-frist-blog/</loc>
-    
-    <lastmod>2020-07-16T06:07:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/16/hello-world/</loc>
-    
-    <lastmod>2020-07-16T05:56:29.320Z</lastmod>
     
   </url>
   
