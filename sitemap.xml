@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2020-07-18T06:45:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/01-valineerr/</loc>
     
     <lastmod>2020-07-17T10:07:00.000Z</lastmod>
@@ -9,7 +16,7 @@
   </url>
   
   <url>
-    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/02-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
+    <loc>http://leahzheng.gitee.io/leah_blog/2020/07/17/03-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2020-07-17T10:07:00.000Z</lastmod>
     

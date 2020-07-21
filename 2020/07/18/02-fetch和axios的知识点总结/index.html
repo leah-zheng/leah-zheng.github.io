@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02-fetch和axios的知识点总结 | Leah's blog</title><meta name="description" content="fetch VS axios"><meta name="keywords" content="fetch,axios"><meta name="author" content="Leah Zheng"><meta name="copyright" content="Leah Zheng"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/leah_blog/img/favicon.ico"><link rel="canonical" href="http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="02-fetch和axios的知识点总结"><meta property="og:url" content="http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"><meta property="og:site_name" content="Leah's blog"><meta property="og:description" content="fetch VS axios"><meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UDG9KO.jpg"><meta property="article:published_time" content="2020-07-18T06:45:34.000Z"><meta property="article:modified_time" content="2020-07-18T06:45:34.000Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/leah_blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="next" title="如何给使用butterfly主题的hexo博客添加Valine评论功能" href="http://leahzheng.gitee.io/leah_blog/2020/07/17/01-valineerr/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/leah_blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><div class="aplayer" data-id="1741189317" data-server="tencent" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="none"></div><link rel="stylesheet" href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css"><script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script><link rel="stylesheet" href="../../themes/butterfly/source/css/iconfont.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/leah_blog/atom.xml" title="Leah's blog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/leah_blog/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/leah_blog/archives/"><div class="headline">文章</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/leah_blog/tags/"><div class="headline">标签</div><div class="length_num">4</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/leah_blog/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/leah_blog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/leah_blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/leah_blog/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page" href="/leah_blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/leah_blog/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要知识点："><span class="toc-number">1.</span> <span class="toc-text">主要知识点：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fetch"><span class="toc-number"></span> <span class="toc-text">fetch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch的优势（与XMLhttpRequset相比）"><span class="toc-number">0.1.</span> <span class="toc-text">fetch的优势（与XMLhttpRequset相比）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch的缺点"><span class="toc-number">0.2.</span> <span class="toc-text">fetch的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#axios"><span class="toc-number"></span> <span class="toc-text">axios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#axios优点"><span class="toc-number">1.</span> <span class="toc-text">axios优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number"></span> <span class="toc-text">总结</span></a></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s1.ax1x.com/2020/07/16/UDG9KO.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/leah_blog/">Leah's blog</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/leah_blog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/leah_blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/leah_blog/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page" href="/leah_blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/leah_blog/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/leah_blog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">02-fetch和axios的知识点总结</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-07-18 14:45:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-07-18</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-07-18 14:45:34"><i class="fas fa-history fa-fw"></i> 更新于 2020-07-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/leah_blog/categories/XHR/">XHR</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h3 id="主要知识点："><a href="#主要知识点：" class="headerlink" title="主要知识点："></a>主要知识点：</h3><ol>
+<li>fetch是规范底层API</li>
+<li>axios是封装</li>
+<li>fetch和axios的优缺点</li>
+</ol>
+<h2 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h2><p>fetch是一个低层次API，可以考虑成原生的XHR，使用起来并不是很方便，需要进行封装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fetch(&#39;http:&#x2F;&#x2F;xxx.com&#x2F;xxx.json&#39;,第二个参数指定传输方式get、post)</span><br><span class="line">.then(res&#x3D;&gt;&#123;</span><br><span class="line">	return res.json();</span><br><span class="line">&#125;).then(myJson&#x3D;&gt;&#123;</span><br><span class="line">	console.log(myJson)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="fetch的优势（与XMLhttpRequset相比）"><a href="#fetch的优势（与XMLhttpRequset相比）" class="headerlink" title="fetch的优势（与XMLhttpRequset相比）"></a>fetch的优势（与XMLhttpRequset相比）</h4><ol>
+<li>语法简洁，更加语义话</li>
+<li>基于标准Promise实现，支持async/await</li>
+<li>更加底层，提供的Api丰富（request，response）</li>
+<li>脱离了XHR，是ES规范里新的实现方式</li>
+</ol>
+<h4 id="fetch的缺点"><a href="#fetch的缺点" class="headerlink" title="fetch的缺点"></a>fetch的缺点</h4><ol>
+<li>fetch只对网络错误请求报错，400、500都当作成功的请求</li>
+<li>fetch默认不会带cookie，需要添加配置项：fetch(url,{credentials:’include’})</li>
+<li>fetch不支持abort终止请求</li>
+<li>当上传较大的文件时，fetch不支持进度的监测，axios支持</li>
+<li>fetch api需要手动处理返回的数据</li>
+</ol>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>axios是基于Promise用于浏览器和nodejs的HTTP客户端，本质上也是对原生XHR(XMLhttpRequest)的封装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.get(&#39;&#x2F;user&#39;,&#123;</span><br><span class="line">	params:&#123;</span><br><span class="line">		id:123</span><br><span class="line">	&#125;</span><br><span class="line">&#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">	console.log(res)</span><br><span class="line">&#125;).catch(err &#x3D;&gt; &#123;</span><br><span class="line">	console.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="axios优点"><a href="#axios优点" class="headerlink" title="axios优点"></a>axios优点</h3><ol>
+<li>从浏览器中创建XHR</li>
+<li>支持PromiseAPI</li>
+<li>客户端支持防止CSRF</li>
+<li>提供一些并发请求的接口</li>
+<li>从node.js创建http请求</li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据</li>
+<li>可以终止请求</li>
+<li>自动转换json数据</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>axios既提供了并发的封装，也没有fetch的各种问题，而且体积也较小，当之无愧现在最应该选用的请求的方法。</p>
+<p>fetch vs axios</p>
+<ol>
+<li><p>fetch是底层的api 浏览器原生支持的；axios是一个封装好的框架</p>
+</li>
+<li><p>axios  支持浏览器和nodejs前后端发请求，支持promise语法，支持自动解析json，支持中断请求，支持拦截请求，支持请求进度条检测，支持客户端防止csrf</p>
+</li>
+<li><p>fetch的优点是浏览器原生支持的api，原生支持promise，语法简洁，符合es标准规范，缺点是不支持文件上传进度的检测，不支持终端请求，默认不带cookie，使用不完美，需要封装</p>
+</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Leah Zheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://leahzheng.gitee.io/leah_blog" target="_blank">Leah's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/leah_blog/tags/fetch/">fetch</a><a class="post-meta__tags" href="/leah_blog/tags/axios/">axios</a></div><div class="post_share"><div class="social-share" data-image="https://s1.ax1x.com/2020/07/16/UDG9KO.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/leah_blog/2020/07/17/01-valineerr/"><img class="next-cover" data-src="https://s1.ax1x.com/2020/07/16/UDG9KO.jpg" onerror="onerror=null;src='/leah_blog/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">如何给使用butterfly主题的hexo博客添加Valine评论功能</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'RfNX3RMVFCEeS06KasYCAtjt-gzGzoHsz',
+  appKey: 'tTWXrhAUDRMtHLOPEzfe3BGp',
+  placeholder: 'Please leave your footprints',
+  avatar: 'retro',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '//i0.hdslb.com/bfs/emote/',
+  emojiMaps: "",
+  enableQQ: false,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Leah Zheng</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/leah_blog/js/utils.js"></script><script src="/leah_blog/js/main.js"></script><script src="/leah_blog/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script></body></html>

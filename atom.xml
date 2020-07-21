@@ -6,7 +6,7 @@
   <link href="/leah_blog/atom.xml" rel="self"/>
   
   <link href="http://leahzheng.gitee.io/leah_blog/"/>
-  <updated>2020-07-17T10:07:00.000Z</updated>
+  <updated>2020-07-18T06:45:34.000Z</updated>
   <id>http://leahzheng.gitee.io/leah_blog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>02-fetch和axios的知识点总结</title>
+    <link href="http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <id>http://leahzheng.gitee.io/leah_blog/2020/07/18/02-fetch%E5%92%8Caxios%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</id>
+    <published>2020-07-18T06:45:34.000Z</published>
+    <updated>2020-07-18T06:45:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\leah_blog\assets\css\APlayer.min.css"><script src="\leah_blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\leah_blog\assets\js\Meting.min.js"></script><h3 id="主要知识点："><a href="#主要知识点：" class="headerlink" title="主要知识点："></a>主要知识点：</h3><ol><li>fetch是规范底层API</li><li>axios是封装</li><li>fetch和axios的优缺点</li></ol><h2 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h2><p>fetch是一个低层次API，可以考虑成原生的XHR，使用起来并不是很方便，需要进行封装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fetch(&#39;http:&#x2F;&#x2F;xxx.com&#x2F;xxx.json&#39;,第二个参数指定传输方式get、post)</span><br><span class="line">.then(res&#x3D;&gt;&#123;</span><br><span class="line">return res.json();</span><br><span class="line">&#125;).then(myJson&#x3D;&gt;&#123;</span><br><span class="line">console.log(myJson)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h4 id="fetch的优势（与XMLhttpRequset相比）"><a href="#fetch的优势（与XMLhttpRequset相比）" class="headerlink" title="fetch的优势（与XMLhttpRequset相比）"></a>fetch的优势（与XMLhttpRequset相比）</h4><ol><li>语法简洁，更加语义话</li><li>基于标准Promise实现，支持async/await</li><li>更加底层，提供的Api丰富（request，response）</li><li>脱离了XHR，是ES规范里新的实现方式</li></ol><h4 id="fetch的缺点"><a href="#fetch的缺点" class="headerlink" title="fetch的缺点"></a>fetch的缺点</h4><ol><li>fetch只对网络错误请求报错，400、500都当作成功的请求</li><li>fetch默认不会带cookie，需要添加配置项：fetch(url,{credentials:’include’})</li><li>fetch不支持abort终止请求</li><li>当上传较大的文件时，fetch不支持进度的监测，axios支持</li><li>fetch api需要手动处理返回的数据</li></ol><h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>axios是基于Promise用于浏览器和nodejs的HTTP客户端，本质上也是对原生XHR(XMLhttpRequest)的封装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.get(&#39;&#x2F;user&#39;,&#123;</span><br><span class="line">params:&#123;</span><br><span class="line">id:123</span><br><span class="line">&#125;</span><br><span class="line">&#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">console.log(res)</span><br><span class="line">&#125;).catch(err &#x3D;&gt; &#123;</span><br><span class="line">console.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="axios优点"><a href="#axios优点" class="headerlink" title="axios优点"></a>axios优点</h3><ol><li>从浏览器中创建XHR</li><li>支持PromiseAPI</li><li>客户端支持防止CSRF</li><li>提供一些并发请求的接口</li><li>从node.js创建http请求</li><li>拦截请求和响应</li><li>转换请求和响应数据</li><li>可以终止请求</li><li>自动转换json数据</li></ol><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>axios既提供了并发的封装，也没有fetch的各种问题，而且体积也较小，当之无愧现在最应该选用的请求的方法。</p><p>fetch vs axios</p><ol><li><p>fetch是底层的api 浏览器原生支持的；axios是一个封装好的框架</p></li><li><p>axios  支持浏览器和nodejs前后端发请求，支持promise语法，支持自动解析json，支持中断请求，支持拦截请求，支持请求进度条检测，支持客户端防止csrf</p></li><li><p>fetch的优点是浏览器原生支持的api，原生支持promise，语法简洁，符合es标准规范，缺点是不支持文件上传进度的检测，不支持终端请求，默认不带cookie，使用不完美，需要封装</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      fetch VS axios
+    
+    </summary>
+    
+    
+      <category term="XHR" scheme="http://leahzheng.gitee.io/leah_blog/categories/XHR/"/>
+    
+    
+      <category term="fetch" scheme="http://leahzheng.gitee.io/leah_blog/tags/fetch/"/>
+    
+      <category term="axios" scheme="http://leahzheng.gitee.io/leah_blog/tags/axios/"/>
+    
+  </entry>
   
   <entry>
     <title>如何给使用butterfly主题的hexo博客添加Valine评论功能</title>
@@ -44,8 +69,8 @@
   
   <entry>
     <title>01-Promise知识点整理</title>
-    <link href="http://leahzheng.gitee.io/leah_blog/2020/07/17/02-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
-    <id>http://leahzheng.gitee.io/leah_blog/2020/07/17/02-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</id>
+    <link href="http://leahzheng.gitee.io/leah_blog/2020/07/17/03-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
+    <id>http://leahzheng.gitee.io/leah_blog/2020/07/17/03-Promise%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</id>
     <published>2020-07-17T10:07:00.000Z</published>
     <updated>2020-07-17T10:07:00.000Z</updated>
     
@@ -53,10 +78,7 @@
     
     <summary type="html">
     
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\leah_blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\leah_blog\assets\js
-      
+      立下了每日更新博客的flag，今天是第一天~本篇是我对promise知识点的总结
     
     </summary>
     
