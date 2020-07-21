@@ -6,7 +6,7 @@
   <link href="/leah_blog/atom.xml" rel="self"/>
   
   <link href="http://leahzheng.gitee.io/leah_blog/"/>
-  <updated>2020-07-18T06:45:34.000Z</updated>
+  <updated>2020-07-20T04:23:41.000Z</updated>
   <id>http://leahzheng.gitee.io/leah_blog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>03-实现浏览器内多个标签页之间的通讯</title>
+    <link href="http://leahzheng.gitee.io/leah_blog/2020/07/20/04-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E8%AE%AF/"/>
+    <id>http://leahzheng.gitee.io/leah_blog/2020/07/20/04-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E8%AE%AF/</id>
+    <published>2020-07-20T04:23:41.000Z</published>
+    <updated>2020-07-20T04:23:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\leah_blog\assets\css\APlayer.min.css"><script src="\leah_blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\leah_blog\assets\js\Meting.min.js"></script><p>实现多页通讯主要有利用浏览器储存和服务器方式</p><h3 id="知识考察点"><a href="#知识考察点" class="headerlink" title="知识考察点"></a>知识考察点</h3><p>什么是多页应用</p><p>两种浏览器存储方式实现多页间通讯</p><p>websoket和shareworker实现多页通讯</p><h3 id="方法一——调用localstorage"><a href="#方法一——调用localstorage" class="headerlink" title="方法一——调用localstorage"></a>方法一——调用localstorage</h3><p>页面一：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">window.onload &#x3D; ()&#x3D;&gt;&#123;</span><br><span class="line">var btnEle &#x3D; document.getElementById(&#39;btn&#39;);</span><br><span class="line">var nameEle &#x3D; document.getElementById(&#39;name&#39;);</span><br><span class="line">btnEle.onclick &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">var name &#x3D; nameEle.value;</span><br><span class="line">localstorage.setItem(&#39;name&#39;,name) &#x2F;&#x2F;(&#39;键&#39;,&#39;值&#39;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>页面二：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">window.onload &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">window.addEventListener(&#39;storage&#39;, (event)&#x3D;&gt;&#123;</span><br><span class="line">console.log(event.key,event.newValue)</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="方法二——调用cookie-setInterval"><a href="#方法二——调用cookie-setInterval" class="headerlink" title="方法二——调用cookie+setInterval()"></a>方法二——调用cookie+setInterval()</h3><p>将要传递的信息储存再cookie中，每隔一段时间读取cookie信息，即可随时获得要传递的信息。</p><p>在A页面将需要传递的消息储存在cookie中</p><p>在B页面设置setInterval，以一定时间间隔去读取cookie的值</p><h5 id="页面一："><a href="#页面一：" class="headerlink" title="页面一："></a>页面一：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">window.onload &#x3D; function() &#123;</span><br><span class="line">var btnEle &#x3D; document.getElementById(&#39;btn&#39;);</span><br><span class="line">var iptEle &#x3D; document.getElementById(&#39;name&#39;);</span><br><span class="line">btnEle.onclick &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">var name &#x3D; iptEle.value;</span><br><span class="line">document.cookie &#x3D; &#39;name&#x3D;&#39;+name;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="页面二："><a href="#页面二：" class="headerlink" title="页面二："></a>页面二：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">window.onload &#x3D; function() &#123;</span><br><span class="line">function getCookie(key)&#123;</span><br><span class="line">console.log(document.cookie.replace(&#x2F;;\s+\gim,&#39;\&#39;,&#39;\&#39;).replace(&#x2F;&#x3D;&#x2F;gim,&#39;\&#39;:\&#39;&#39;));</span><br><span class="line">if(document.cookie) &#123;</span><br><span class="line">return JSON.parse(&#39;&#123;\&#39;&#39;+document.cookie.replace(&#x2F;;\s+\gim,&#39;\&#39;,&#39;\&#39;).replace(&#x2F;&#x3D;&#x2F;gim,&#39;\&#39;:\&#39;&#39;&#125;&#39;)</span><br><span class="line">&#125;else&#123;</span><br><span class="line">return &#39;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">setInterval(function()&#123;</span><br><span class="line">console.log(&#39;name&#x3D;&#39;+getCookie(&#39;name&#39;))</span><br><span class="line">&#125;,5000)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="监听服务器事件"><a href="#监听服务器事件" class="headerlink" title="监听服务器事件"></a>监听服务器事件</h3><h4 id="第一种-websocket通讯"><a href="#第一种-websocket通讯" class="headerlink" title="第一种 websocket通讯"></a>第一种 websocket通讯</h4><p>websocket是全双工通信，可以实现多个标签页之间的通信。建立起websocket之后，服务器可以主动发数据给浏览器，浏览器也可以主动发数据给服务器。</p><p>http请求是半双工通讯，浏览器主动请求服务器发数据，服务器才能发数据，服务器不能主动给浏览器发数据</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;create websocket connection</span><br><span class="line">const socket &#x3D; new webSocket(&#39;ws:&#x2F;&#x2F;localhost:8080&#39;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;connection opened</span><br><span class="line">socket.addEventListener(&#39;open&#39;,function(event)&#123;</span><br><span class="line">socket.send(&#39;hello,server&#39;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;listen for message</span><br><span class="line">socket.addEventListener(&#39;message&#39;,function(event)&#123;</span><br><span class="line">console.log(event.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h4 id="第二种-html5新特性sharedWorker"><a href="#第二种-html5新特性sharedWorker" class="headerlink" title="第二种 html5新特性sharedWorker"></a>第二种 html5新特性sharedWorker</h4>]]></content>
+    
+    <summary type="html">
+    
+      fetch VS axios
+    
+    </summary>
+    
+    
+      <category term="connection" scheme="http://leahzheng.gitee.io/leah_blog/categories/connection/"/>
+    
+    
+      <category term="locolStorage" scheme="http://leahzheng.gitee.io/leah_blog/tags/locolStorage/"/>
+    
+      <category term="cookie" scheme="http://leahzheng.gitee.io/leah_blog/tags/cookie/"/>
+    
+      <category term="webSocket" scheme="http://leahzheng.gitee.io/leah_blog/tags/webSocket/"/>
+    
+  </entry>
   
   <entry>
     <title>02-fetch和axios的知识点总结</title>
