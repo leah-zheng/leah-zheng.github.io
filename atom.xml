@@ -36,9 +36,9 @@
     
     
     
-      <category term="Symbol" scheme="http://yoursite.com/tags/Symbol/"/>
-    
       <category term="prototype" scheme="http://yoursite.com/tags/prototype/"/>
+    
+      <category term="Symbol" scheme="http://yoursite.com/tags/Symbol/"/>
     
   </entry>
   
