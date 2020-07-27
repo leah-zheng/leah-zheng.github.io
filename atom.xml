@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-26T14:02:17.899Z</updated>
+  <updated>2020-07-27T15:02:01.377Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>08-HTTP缓存控制</title>
+    <link href="http://yoursite.com/2020/07/27/14-HTTP%E7%BC%93%E5%AD%98%E6%8E%A7%E5%88%B6/"/>
+    <id>http://yoursite.com/2020/07/27/14-HTTP%E7%BC%93%E5%AD%98%E6%8E%A7%E5%88%B6/</id>
+    <published>2020-07-27T11:42:36.000Z</published>
+    <updated>2020-07-27T15:02:01.377Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>HTTP缓存作用范围：从浏览器第一次请求到第二次浏览器响应，至少需要两次http请求。</p><p>HTTP缓存能够帮助服务器提升并发性能，很多资源不需要重复请求服务器，通过浏览器缓存就能获取到。</p><p>浏览器缓存分为：<strong>强缓存</strong>和<strong>协商缓存</strong></p><h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>不用发送请求到服务器就能获取到缓存文件</p><p><strong>如何判断强缓存</strong>：状态码为200OK，from cache</p><p>强缓存是利用http的返回头中的Expires和cache-Contrl来控制的，用来表示资源的缓存时间</p><h5 id="为什么有了Expires还要有cache-Contrl？"><a href="#为什么有了Expires还要有cache-Contrl？" class="headerlink" title="为什么有了Expires还要有cache-Contrl？"></a>为什么有了Expires还要有cache-Contrl？</h5><p>因为Expires是绝对时间，存在服务器与客户端时间不同步的问题。而cache-Contrl是相对时间，是相对于第一次请求的时间计算的。</p><p>cache-Contrl:max-age=9999</p><h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>发送请求到服务器，服务器判断本地缓存是否更新，若可以使用，服务器则不返回资源信息，浏览器继续从缓存中获取资源。</p><p><strong>判断协商缓存</strong>：状态码304 利用http返回头中的last-modify(第一次请求服务器返回)/if-modify-since(第二次浏览器发送请求)或Etag/if-none-match(返回唯一的校验码) </p><h5 id="为什么有了lats-modify还要有Etag？"><a href="#为什么有了lats-modify还要有Etag？" class="headerlink" title="为什么有了lats-modify还要有Etag？"></a>为什么有了lats-modify还要有Etag？</h5><p>因为last-modify的时间精确到秒，若是比秒更短的时间则无法判断，存在时间精度问题。而Etag返回的是唯一的校验码，每次更新缓存就会改变。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="HTTP" scheme="http://yoursite.com/categories/HTTP/"/>
+    
+    
+      <category term="HTTP" scheme="http://yoursite.com/tags/HTTP/"/>
+    
+  </entry>
   
   <entry>
     <title>07-HTTP 基本概念</title>
