@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-03T12:29:46.058Z</updated>
+  <updated>2020-08-04T14:39:29.142Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>10-Javascript显式和隐式类型转换</title>
+    <link href="http://yoursite.com/2020/08/02/19-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://yoursite.com/2020/08/02/19-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</id>
+    <published>2020-08-02T04:23:43.000Z</published>
+    <updated>2020-08-04T14:39:29.142Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="显式类型转换"><a href="#显式类型转换" class="headerlink" title="显式类型转换"></a>显式类型转换</h2><h3 id="1-Number"><a href="#1-Number" class="headerlink" title="1.Number()"></a>1.Number()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Number(true&#x2F;false)  &#x2F;&#x2F; 1&#x2F;0</span><br><span class="line">Number(null)   &#x2F;&#x2F; 0</span><br><span class="line">Number(undefined)&#x2F;&#x2F; NaN</span><br><span class="line">Number(&#39;a&#39;)   &#x2F;&#x2F; NaN</span><br><span class="line">Number(&#39;1a&#39;) &#x2F;&#x2F; NaN</span><br></pre></td></tr></table></figure><h2 id="2-praseInt"><a href="#2-praseInt" class="headerlink" title="2.praseInt()"></a>2.praseInt()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">praseInt(true&#x2F;false) &#x2F;&#x2F; NaN</span><br><span class="line">praseInt(null)  &#x2F;&#x2F; 0</span><br><span class="line">praseInt(undefined)  &#x2F;&#x2F; NaN</span><br><span class="line">praseInt(NaN) &#x2F;&#x2F; NaN</span><br><span class="line">praseInt(&#39;abc123&#39;)   &#x2F;&#x2F; NaN</span><br><span class="line">praseInt(&#39;123abc&#39;)   &#x2F;&#x2F; 123</span><br></pre></td></tr></table></figure><h2 id="3-Boolean"><a href="#3-Boolean" class="headerlink" title="3.Boolean()"></a>3.Boolean()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Boolean(1&#x2F;0)&#x2F;&#x2F; ture&#x2F;false</span><br><span class="line">Boolean(null)&#x2F;&#x2F; false</span><br><span class="line">Boolean(undefined)  &#x2F;&#x2F; false</span><br><span class="line">Boolean(NaN)&#x2F;&#x2F; false</span><br><span class="line">Boolean(&quot;&quot;)&#x2F;&#x2F; false</span><br><span class="line">Boolean(0)&#x2F;&#x2F; false</span><br><span class="line">Boolean(false)&#x2F;&#x2F; false</span><br><span class="line">其他都是true</span><br></pre></td></tr></table></figure><p><strong>注意</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined.toString()和null.toString()都会报错</span><br></pre></td></tr></table></figure><h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><h4 id="隐式转成number"><a href="#隐式转成number" class="headerlink" title="隐式转成number"></a>隐式转成number</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+;-;*;&#x2F;;%;</span><br><span class="line">++;--;&#x3D;&#x3D;;!&#x3D;;</span><br><span class="line">&gt;;&lt;;&lt;&#x3D;;&gt;&#x3D;;</span><br><span class="line">补充：undefined&#x3D;&#x3D;null</span><br></pre></td></tr></table></figure><h3 id="isNaN"><a href="#isNaN" class="headerlink" title="isNaN()"></a>isNaN()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">isNaN(NaN)&#x2F;&#x2F;true</span><br><span class="line">isNaN(123)&#x2F;&#x2F;false</span><br><span class="line">isNaN(&#39;123&#39;)&#x2F;&#x2F;false</span><br><span class="line">isNaN(undefined)&#x2F;&#x2F;true</span><br><span class="line">isNaN(null)&#x2F;&#x2F;false</span><br><span class="line">isNaN(&#39;a&#39;)&#x2F;&#x2F;true</span><br><span class="line">number &#x3D;&gt;isNaN &#x3D;&gt;boo</span><br></pre></td></tr></table></figure><h2 id="typeof-判断类型"><a href="#typeof-判断类型" class="headerlink" title="typeof()判断类型"></a>typeof()判断类型</h2><ol><li>123 =&gt; number</li><li>‘123’ =&gt; string</li><li>{123},[123],null =&gt;object</li><li>function(){} =&gt;function</li><li>undefined</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typeof(1-&#39;1&#39;) &#x2F;&#x2F; number</span><br><span class="line">typeof(&#39;1&#39;-&#39;1&#39;)&#x2F;&#x2F;number</span><br><span class="line">typeof(1)&#x2F;&#x2F;number</span><br><span class="line">typeof(typeof(1))&#x2F;&#x2F;string</span><br><span class="line">typeof(undefined)&#x2F;&#x2F;undefined</span><br><span class="line">typeof(typeof(undefined))&#x2F;&#x2F;string</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="数据类型" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+    
+      <category term="数据类型" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>vue解决跨域问题</title>
