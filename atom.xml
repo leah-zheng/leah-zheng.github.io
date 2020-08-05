@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-04T14:39:29.142Z</updated>
+  <updated>2020-08-05T15:50:51.667Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>11-JavaScript预编译过程及例题整理</title>
+    <link href="http://yoursite.com/2020/08/03/20-JavaScript%E9%A2%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
+    <id>http://yoursite.com/2020/08/03/20-JavaScript%E9%A2%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</id>
+    <published>2020-08-03T06:34:51.000Z</published>
+    <updated>2020-08-05T15:50:51.667Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>预编译是执行函数之前的过程</p><h3 id="GO全局的执行期上下文"><a href="#GO全局的执行期上下文" class="headerlink" title="GO全局的执行期上下文"></a>GO全局的执行期上下文</h3><ol><li>寻找变量声明</li><li>寻找函数声明</li><li>执行 </li></ol><h3 id="AO函数的执行器上下文"><a href="#AO函数的执行器上下文" class="headerlink" title="AO函数的执行器上下文"></a>AO函数的执行器上下文</h3><ol><li>寻找形参和变量声明</li><li>实参值赋值给形参</li><li>寻找函数声明，赋值</li><li>执行</li></ol><p><strong>在函数内部未声明的变量会提升到全局作用域，即暗示全局作用域</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="预编译" scheme="http://yoursite.com/categories/%E9%A2%84%E7%BC%96%E8%AF%91/"/>
+    
+    
+      <category term="预编译" scheme="http://yoursite.com/tags/%E9%A2%84%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="AO" scheme="http://yoursite.com/tags/AO/"/>
+    
+      <category term="GO" scheme="http://yoursite.com/tags/GO/"/>
+    
+  </entry>
   
   <entry>
     <title>10-Javascript显式和隐式类型转换</title>
