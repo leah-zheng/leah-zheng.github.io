@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-11T15:01:44.553Z</updated>
+  <updated>2020-08-12T04:45:25.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>01-发展史、ECMA、编程语言、变量、JS值</title>
+    <link href="http://yoursite.com/2020/08/12/01-%E5%8F%91%E5%B1%95%E5%8F%B2%E3%80%81ECMA%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E3%80%81%E5%8F%98%E9%87%8F%E3%80%81JS%E5%80%BC/"/>
+    <id>http://yoursite.com/2020/08/12/01-%E5%8F%91%E5%B1%95%E5%8F%B2%E3%80%81ECMA%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E3%80%81%E5%8F%98%E9%87%8F%E3%80%81JS%E5%80%BC/</id>
+    <published>2020-08-12T04:45:25.000Z</published>
+    <updated>2020-08-12T04:45:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="5大主流浏览器的内核"><a href="#5大主流浏览器的内核" class="headerlink" title="5大主流浏览器的内核"></a>5大主流浏览器的内核</h2><ul><li>IE    trident</li><li>chrome    webkit blink</li><li>safari        webkit</li><li>firefox       gecko</li><li>opera        presto</li></ul><h2 id="浏览器的历史和js诞生"><a href="#浏览器的历史和js诞生" class="headerlink" title="浏览器的历史和js诞生"></a>浏览器的历史和js诞生</h2><ol><li><p>1990    蒂姆·伯纳斯·李  超文本分享资讯的人</p><p>world wide web 移植到C  =&gt;libwww=&gt;nexus</p><p>允许别人浏览他人编写的网站</p></li><li><p>1993  美国伊利诺大学NCSA组织（马克·安德森）开发了MOSIAC浏览器（图形化浏览器）能够显示图片</p></li><li><p>1994  马克·安德森和吉姆·克拉克（硅图SGI）成立MOSIAC communication corporation</p><p>MOSIAC =&gt;伊利诺大学=&gt;spy glass公司=&gt;Netscape communication corporation</p><p>网景公司=&gt;Netscape navigator  =&gt;2003</p></li><li><p>1996  </p><ol><li>微软的公司收购spy glass</li></ol><p>=&gt;IE  1.0</p><p>​    IE3  JScript</p><p>​    2. 网景公司Brendan eich在Netscape navigator开发出了livescript(javascript前生) </p><ol start="3"><li>SUN的JAVA有知名度，网景livescript不温不火，网景与sun合作推广和宣传产品，livescript=&gt;javascript</li></ol></li><li><p>2001  IE6 xp诞生</p><p>​            JS引擎</p></li><li><p>2003   Mozilla公司  firefox =&gt; 根据Netscape navigator复制</p></li><li><p>2008   google基于webkit blink gears</p><p>chrome =&gt;V8=&gt;JS引擎</p><ol><li>直接翻译机器码</li><li>独立于浏览器运行</li></ol></li><li><p>2009  甲骨文oracle收购了sun公司</p><p>​            JS 所有权给甲骨文</p></li></ol><h2 id="ECMA"><a href="#ECMA" class="headerlink" title="ECMA"></a>ECMA</h2><p>European Computer Manufactures Association 欧洲计算机制造联合会</p><p>评估、开发、认可电信、计算机标准</p><p>ECMA-262 脚本语言规范  ECMAScript</p><p>ES5 ES6 规范化脚本语言</p><h2 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h2><p>高级语言：人能理解机器不能理解</p><p>编译器  解释器</p><p>翻译过程不同：</p><p>编译性语言：源码=&gt;编译器=&gt;机器语言=&gt;可执行的文件；适合写逻辑性强的大型项目</p><p>解释性语言：源码=&gt;解释器=&gt;解释一行执行一行； 不需要根据不同的系统平台进行移植，速度更快一些，</p><p>.java =&gt;javac=&gt;.class=&gt;JVM解释执行</p><p>C++ .cpp源码=&gt;编译器=&gt;.s汇编=&gt;汇编器=&gt;.obj目标代码=&gt;链接器=&gt;可执行文件</p><p>脚本语言：</p><p>​    =&gt;脚本引擎=&gt;解释器</p><p>javascript客户端脚本：解释器在浏览器</p><p> php服务端脚本：解释器在服务器</p><h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>ECMAscript</p><p>DOM  document object model  W3C</p><p>BOM  browser object model   没有规范</p><p>JS引擎是单线程引擎</p><p>单线程：一次只能执行一个任务</p><p>​                =&gt;如何模拟多线程  </p><p>​    轮转时间片：短时间之内轮流执行多个任务片段</p><ol><li>任务1 任务2…</li><li>切分任务</li><li>随机排列任务片段，组成队列</li><li>按照这个队列顺序将任务片段送进JS进程</li><li>JS线程执行一个又一个的任务片段</li></ol><p>多线程：一次能同时执行多个任务</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&#39;text&#x2F;javascript&#39;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure><p>编程语言必备：变量、数据结构、函数、运算能力</p><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;  <span class="comment">//变量声明</span></span><br><span class="line">a=<span class="number">3</span>;<span class="comment">//变量赋值</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="number">3</span> <span class="comment">//变量声明并赋值</span></span><br></pre></td></tr></table></figure><p>变量命名规范：</p><ul><li>不能以数字开头，能字母_$开头</li><li>变量里可以包含字母_$数字</li><li>不能以关键字、保留字命名</li><li>驼峰命名法 小驼峰 大驼峰</li></ul><p><strong>先运算&gt;再赋值</strong></p><h2 id="JS值"><a href="#JS值" class="headerlink" title="JS值"></a>JS值</h2><h3 id="原始值-gt-基本类型（5种）"><a href="#原始值-gt-基本类型（5种）" class="headerlink" title="原始值-&gt;基本类型（5种）"></a>原始值-&gt;基本类型（5种）</h3><ul><li>Number 数字</li><li>String 字符串</li><li>Boolean 布尔值</li><li>undefined 未被定义</li><li>null 空值</li></ul><h3 id="引用值"><a href="#引用值" class="headerlink" title="引用值"></a>引用值</h3><ul><li>object</li><li>array</li><li>function</li><li>date</li><li>RegExp</li></ul><h3 id="变量空间存储原始值和引用值"><a href="#变量空间存储原始值和引用值" class="headerlink" title="变量空间存储原始值和引用值"></a>变量空间存储原始值和引用值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">3</span>,</span><br><span class="line">b = a;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure><p>原始值存储在栈内存，先进后出。重新给a赋值会开辟新的内存空间并赋值，原来的值保持不变，只是对应的名称不在了。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/12/ajOhKf.png" alt=""></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [1,2,3,4,5],</span><br><span class="line">arr2 &#x3D; arr1;</span><br><span class="line">var arr1 &#x3D; [1,2];</span><br></pre></td></tr></table></figure><p>引用值的实际数据存储在堆内存，而栈内存中存储的只是指向堆内存的地址。将arr1的值赋值给arr2，其实就指向同一个堆内存的地址。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/12/ajjWB8.png" alt=""></p><p>给arr1重新赋值就是在栈内存中开启新的空间，存储指向存在堆内存中的新数据的地址。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/12/ajv93R.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="ECMAscript" scheme="http://yoursite.com/categories/ECMAscript/"/>
+    
+    
+      <category term="ECMAscript" scheme="http://yoursite.com/tags/ECMAscript/"/>
+    
+      <category term="变量" scheme="http://yoursite.com/tags/%E5%8F%98%E9%87%8F/"/>
+    
+      <category term="JS值" scheme="http://yoursite.com/tags/JS%E5%80%BC/"/>
+    
+  </entry>
   
   <entry>
     <title>16-数组与数组的方法</title>
@@ -539,32 +569,6 @@
       <category term="JS算法" scheme="http://yoursite.com/tags/JS%E7%AE%97%E6%B3%95/"/>
     
       <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>05-call和apply的区别是什么，哪个性能更好一些？</title>
-    <link href="http://yoursite.com/2020/07/21/08-call%E5%92%8Capply%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/"/>
-    <id>http://yoursite.com/2020/07/21/08-call%E5%92%8Capply%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</id>
-    <published>2020-07-21T12:55:23.000Z</published>
-    <updated>2020-07-22T12:55:56.461Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>call和apply都是<strong>Function原型上</strong>的方法，而每个函数作为Function这个类的<strong>实例</strong>，可以调用原型上的call和apply方法。<br>call和apply都是用来改变this指向的，区别是call是传递参数时是<strong>一个一个传参</strong>，而apply要求把参数<strong>以数组的形式</strong>传递。<br>还有一个类似的方式bind()，bind也是改变this的指向，<strong>但没有立即执行函数</strong>，只是预先处理改变this指向。<br><strong>call的性能要比apply好一些</strong>，尤其是传递给函数的参数超过<strong>三个</strong>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let arr &#x3D; [1,2,3],</span><br><span class="line">obj &#x3D; &#123;&#125;;</span><br><span class="line">function fn(a,b,c) &#123;&#125;;</span><br><span class="line">fn.apply(obj,arr) &#x2F;&#x2F;a&#x3D;1,b&#x3D;2,c&#x3D;3</span><br><span class="line">fn.call(obj,arr) &#x2F;&#x2F;a&#x3D;[1,2,3] b&#x3D;c&#x3D;undefined</span><br><span class="line">fn.call(obj,..arr) &#x2F;&#x2F;基于es6的展开运算符能够实现把数组中的每一项一次传递给函数</span><br></pre></td></tr></table></figure><h4 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h4><h4 id="自己实现性能测试（只供参考）"><a href="#自己实现性能测试（只供参考）" class="headerlink" title="自己实现性能测试（只供参考）"></a>自己实现性能测试（只供参考）</h4><p>任何代码性能测试都是和测试环境有关的，例如CPU、内存、GPU等电脑当前性能不会有相同的情况，不同浏览器也会导致性能的不同。</p><h5 id="console-time可以测试出一段程序执行的时间"><a href="#console-time可以测试出一段程序执行的时间" class="headerlink" title="console.time可以测试出一段程序执行的时间"></a>console.time可以测试出一段程序执行的时间</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.time(&#39;a&#39;);</span><br><span class="line">for(let i&#x3D;0;i&lt;1000000000;i++) &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">console.timeEnd(&#39;a&#39;)</span><br></pre></td></tr></table></figure><p>console.profile()在火狐浏览器中安装fireBug,可以更精准的获取到程序的每一个步骤所消耗的时间</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="this" scheme="http://yoursite.com/categories/this/"/>
-    
-    
-      <category term="this" scheme="http://yoursite.com/tags/this/"/>
     
   </entry>
   
