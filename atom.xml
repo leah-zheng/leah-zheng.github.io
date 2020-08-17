@@ -275,32 +275,6 @@
   </entry>
   
   <entry>
-    <title>判断输出代码的执行结果并解释为什么</title>
-    <link href="http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/"/>
-    <id>http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/</id>
-    <published>2020-07-28T05:54:14.000Z</published>
-    <updated>2020-08-01T12:54:06.981Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; &#123;n:1&#125;;</span><br><span class="line">var b &#x3D; a ;</span><br><span class="line">a.x &#x3D; a &#x3D; &#123;n : 2&#125;</span><br><span class="line"></span><br><span class="line">console.log(a.x)</span><br><span class="line">console.log(b.x)</span><br></pre></td></tr></table></figure><h5 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h5><p>这道题的关键知识点是连等，首先我们要知道连等开始之前程序会把所有的引用都保存下来，连等的过程中，这些值是保持不变的，等到整个连等都完事了，再一块儿变。</p><p>这是我画的图解：</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/01/a3zXWD.png" alt=""></p><h5 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a.x)  &#x2F;&#x2F; undefined</span><br><span class="line">console.log(b.x)  &#x2F;&#x2F; x:&#123;n:2&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="连等" scheme="http://yoursite.com/categories/%E8%BF%9E%E7%AD%89/"/>
-    
-    
-      <category term="连等" scheme="http://yoursite.com/tags/%E8%BF%9E%E7%AD%89/"/>
-    
-  </entry>
-  
-  <entry>
     <title>09-对TCP三次握手和四次挥手的理解</title>
     <link href="http://yoursite.com/2020/07/28/16-%E5%AF%B9TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>http://yoursite.com/2020/07/28/16-%E5%AF%B9TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%9A%84%E7%90%86%E8%A7%A3/</id>
@@ -323,6 +297,32 @@
     
     
       <category term="HTTP" scheme="http://yoursite.com/tags/HTTP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>判断输出代码的执行结果并解释为什么</title>
+    <link href="http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/"/>
+    <id>http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/</id>
+    <published>2020-07-28T05:54:14.000Z</published>
+    <updated>2020-08-01T12:54:06.981Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; &#123;n:1&#125;;</span><br><span class="line">var b &#x3D; a ;</span><br><span class="line">a.x &#x3D; a &#x3D; &#123;n : 2&#125;</span><br><span class="line"></span><br><span class="line">console.log(a.x)</span><br><span class="line">console.log(b.x)</span><br></pre></td></tr></table></figure><h5 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h5><p>这道题的关键知识点是连等，首先我们要知道连等开始之前程序会把所有的引用都保存下来，连等的过程中，这些值是保持不变的，等到整个连等都完事了，再一块儿变。</p><p>这是我画的图解：</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/01/a3zXWD.png" alt=""></p><h5 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a.x)  &#x2F;&#x2F; undefined</span><br><span class="line">console.log(b.x)  &#x2F;&#x2F; x:&#123;n:2&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="连等" scheme="http://yoursite.com/categories/%E8%BF%9E%E7%AD%89/"/>
+    
+    
+      <category term="连等" scheme="http://yoursite.com/tags/%E8%BF%9E%E7%AD%89/"/>
     
   </entry>
   
@@ -381,32 +381,6 @@
   </entry>
   
   <entry>
-    <title>flex是什么？flex：1表示什么？</title>
-    <link href="http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
-    <published>2020-07-24T14:36:56.000Z</published>
-    <updated>2020-07-25T15:37:57.639Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>flex是三个属性的缩写，分别是flex-grow、flex-shrink、flex-basis。</p><p><strong>flex-grow表示项目的放大比例</strong></p><p>:one:默认为0，即使存在剩余空间也不会放大</p><p>:two:所有项目的flex-grow为1时，等分剩余空间</p><p>:three:flex-row为n的项目，占据的空间（放大的比例）是flex-grow为1的n倍</p><h5 id="flex-shrink表示项目的缩小比例"><a href="#flex-shrink表示项目的缩小比例" class="headerlink" title="flex-shrink表示项目的缩小比例"></a><strong>flex-shrink表示项目的缩小比例</strong></h5><p>:one:默认为1，当空间不足时，项目会自动缩小</p><p>:two:flex-shrink为0时，空间不足，项目不会缩小</p><p>:three: flex-shrink为n的项目，空间不足时缩小的比例是flex-shrink为1的n倍</p><h5 id="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"><a href="#flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小" class="headerlink" title="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"></a><strong>flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小</strong></h5><p>:one:默认为auto，即项目本身的大小</p><p>:two:设置后项目将占据固定空间</p><p>所以flex属性的默认值为：0 1 auto （不放大会缩小）</p><p>  <strong>flex为none</strong>：0 0 auto  （不放大也不缩小）</p><p>  <strong>flex为auto</strong>：1 1 auto  （放大且缩小）</p><p>因此flex：1即为flex-grow：1，经常用作自适应布局，将父容器的display：flex，侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>06-正则表达式知识整理</title>
     <link href="http://yoursite.com/2020/07/24/11-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     <id>http://yoursite.com/2020/07/24/11-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
@@ -429,6 +403,32 @@
     
     
       <category term="RegExp" scheme="http://yoursite.com/tags/RegExp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flex是什么？flex：1表示什么？</title>
+    <link href="http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <id>http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
+    <published>2020-07-24T14:36:56.000Z</published>
+    <updated>2020-07-25T15:37:57.639Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>flex是三个属性的缩写，分别是flex-grow、flex-shrink、flex-basis。</p><p><strong>flex-grow表示项目的放大比例</strong></p><p>:one:默认为0，即使存在剩余空间也不会放大</p><p>:two:所有项目的flex-grow为1时，等分剩余空间</p><p>:three:flex-row为n的项目，占据的空间（放大的比例）是flex-grow为1的n倍</p><h5 id="flex-shrink表示项目的缩小比例"><a href="#flex-shrink表示项目的缩小比例" class="headerlink" title="flex-shrink表示项目的缩小比例"></a><strong>flex-shrink表示项目的缩小比例</strong></h5><p>:one:默认为1，当空间不足时，项目会自动缩小</p><p>:two:flex-shrink为0时，空间不足，项目不会缩小</p><p>:three: flex-shrink为n的项目，空间不足时缩小的比例是flex-shrink为1的n倍</p><h5 id="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"><a href="#flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小" class="headerlink" title="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"></a><strong>flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小</strong></h5><p>:one:默认为auto，即项目本身的大小</p><p>:two:设置后项目将占据固定空间</p><p>所以flex属性的默认值为：0 1 auto （不放大会缩小）</p><p>  <strong>flex为none</strong>：0 0 auto  （不放大也不缩小）</p><p>  <strong>flex为auto</strong>：1 1 auto  （放大且缩小）</p><p>因此flex：1即为flex-grow：1，经常用作自适应布局，将父容器的display：flex，侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
     
   </entry>
   
