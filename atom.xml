@@ -381,32 +381,6 @@
   </entry>
   
   <entry>
-    <title>flex是什么？flex：1表示什么？</title>
-    <link href="http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
-    <published>2020-07-24T14:36:56.000Z</published>
-    <updated>2020-07-25T15:37:57.639Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>flex是三个属性的缩写，分别是flex-grow、flex-shrink、flex-basis。</p><p><strong>flex-grow表示项目的放大比例</strong></p><p>:one:默认为0，即使存在剩余空间也不会放大</p><p>:two:所有项目的flex-grow为1时，等分剩余空间</p><p>:three:flex-row为n的项目，占据的空间（放大的比例）是flex-grow为1的n倍</p><h5 id="flex-shrink表示项目的缩小比例"><a href="#flex-shrink表示项目的缩小比例" class="headerlink" title="flex-shrink表示项目的缩小比例"></a><strong>flex-shrink表示项目的缩小比例</strong></h5><p>:one:默认为1，当空间不足时，项目会自动缩小</p><p>:two:flex-shrink为0时，空间不足，项目不会缩小</p><p>:three: flex-shrink为n的项目，空间不足时缩小的比例是flex-shrink为1的n倍</p><h5 id="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"><a href="#flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小" class="headerlink" title="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"></a><strong>flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小</strong></h5><p>:one:默认为auto，即项目本身的大小</p><p>:two:设置后项目将占据固定空间</p><p>所以flex属性的默认值为：0 1 auto （不放大会缩小）</p><p>  <strong>flex为none</strong>：0 0 auto  （不放大也不缩小）</p><p>  <strong>flex为auto</strong>：1 1 auto  （放大且缩小）</p><p>因此flex：1即为flex-grow：1，经常用作自适应布局，将父容器的display：flex，侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>06-正则表达式知识整理</title>
     <link href="http://yoursite.com/2020/07/24/11-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     <id>http://yoursite.com/2020/07/24/11-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
@@ -429,6 +403,32 @@
     
     
       <category term="RegExp" scheme="http://yoursite.com/tags/RegExp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flex是什么？flex：1表示什么？</title>
+    <link href="http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <id>http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
+    <published>2020-07-24T14:36:56.000Z</published>
+    <updated>2020-07-25T15:37:57.639Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>flex是三个属性的缩写，分别是flex-grow、flex-shrink、flex-basis。</p><p><strong>flex-grow表示项目的放大比例</strong></p><p>:one:默认为0，即使存在剩余空间也不会放大</p><p>:two:所有项目的flex-grow为1时，等分剩余空间</p><p>:three:flex-row为n的项目，占据的空间（放大的比例）是flex-grow为1的n倍</p><h5 id="flex-shrink表示项目的缩小比例"><a href="#flex-shrink表示项目的缩小比例" class="headerlink" title="flex-shrink表示项目的缩小比例"></a><strong>flex-shrink表示项目的缩小比例</strong></h5><p>:one:默认为1，当空间不足时，项目会自动缩小</p><p>:two:flex-shrink为0时，空间不足，项目不会缩小</p><p>:three: flex-shrink为n的项目，空间不足时缩小的比例是flex-shrink为1的n倍</p><h5 id="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"><a href="#flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小" class="headerlink" title="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"></a><strong>flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小</strong></h5><p>:one:默认为auto，即项目本身的大小</p><p>:two:设置后项目将占据固定空间</p><p>所以flex属性的默认值为：0 1 auto （不放大会缩小）</p><p>  <strong>flex为none</strong>：0 0 auto  （不放大也不缩小）</p><p>  <strong>flex为auto</strong>：1 1 auto  （放大且缩小）</p><p>因此flex：1即为flex-grow：1，经常用作自适应布局，将父容器的display：flex，侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
     
   </entry>
   
