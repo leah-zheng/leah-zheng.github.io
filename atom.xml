@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-06T14:41:22.759Z</updated>
+  <updated>2020-11-07T11:02:32.695Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>localStorage、sessionStorage、cookie</title>
+    <link href="http://yoursite.com/2020/11/03/28-localStorage%E3%80%81sessionStorage%E3%80%81cookie/"/>
+    <id>http://yoursite.com/2020/11/03/28-localStorage%E3%80%81sessionStorage%E3%80%81cookie/</id>
+    <published>2020-11-03T12:23:22.000Z</published>
+    <updated>2020-11-07T11:02:32.695Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><table><thead><tr><th></th><th>Cookies</th><th>local Storage</th><th>Session Storage</th></tr></thead><tbody><tr><td>Capacity</td><td>4kb</td><td>10mb</td><td>5mb</td></tr><tr><td>Browsers</td><td>HTML4/HTML5</td><td>HTML5</td><td>HTML5</td></tr><tr><td>Accessible frem</td><td>Any window</td><td>Any window</td><td>same tab</td></tr><tr><td>Storage Location</td><td>Browser and server</td><td>Browser</td><td>Browser</td></tr><tr><td>Expires</td><td>Manually set</td><td>Never</td><td>on tab close</td></tr><tr><td>Sent with request</td><td>yes</td><td>no</td><td>no</td></tr></tbody></table><p>cookie 小的偏好信息，如选择中文的信息保存到cookie</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">'name'</span>,<span class="string">'leah'</span>);</span><br><span class="line">localStorage.getItem(<span class="string">'name'</span>);</span><br><span class="line">sessionStorage.setItem(<span class="string">'name'</span>,<span class="string">'leah'</span>);</span><br><span class="line">sessionStorage.getItem(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure><p>若设置的key相同，不会新增，新的value会替换旧value</p><p>localStorage永远都不会过期，sessionStorage在标签页关闭后被清除</p><p>如何删除localStorage？</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localStorage.removeItem(<span class="string">'name'</span>); <span class="comment">//删除一条</span></span><br><span class="line">localStorage.clear(); <span class="comment">//清除</span></span><br></pre></td></tr></table></figure><p>http协议是无状态的 stateless （第一次请求与第二次请求是没有关系的）</p><p>cookie保存在客户端，会话信息保存在服务端</p><p>跟踪用户</p><ol><li>HTTP headers</li><li>ip地址</li><li>用户登陆</li><li>胖URL</li><li>cookie  服务器发送给浏览器并保存在本地的一小块数据</li></ol><p>服务器接收到http请求，在响应头添加setCookie，并返回给客户端，cookie就会保存到浏览器中，之后每次在对服务器请求时都会带上cookie这条信息，服务器就能通过cookie判断用户，在数据库里找到关于cookie值的相对应信息，并返回想要获得的数据 </p><p>cookie只能逐条设置</p><h5 id="添加cookie"><a href="#添加cookie" class="headerlink" title="添加cookie"></a>添加cookie</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = ‘name=zhengleah<span class="string">';</span></span><br><span class="line"><span class="string">//如果没有设置cookie的过期时间，就会默认添加上一个1969-12-31的过期时间，即关闭浏览器后就会删除的cookie</span></span><br><span class="line"><span class="string">document.cookie = ‘name=zhengleah;max-age=5000'</span>;</span><br><span class="line"><span class="comment">//当前的格林威治时间加上5000ms后才过期</span></span><br><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>,</span><br><span class="line">    day = d.getDate();</span><br><span class="line">d.setDate(day + <span class="number">10</span>);</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'name=leah;expires='</span>+d</span><br><span class="line"><span class="comment">//十天后过期</span></span><br></pre></td></tr></table></figure><h5 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>,</span><br><span class="line">    day = d.getDate();</span><br><span class="line">d.setDate(day - <span class="number">10</span>);</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'name=leah;expires='</span>+d</span><br><span class="line"><span class="comment">//设置过期时间为过去时间</span></span><br></pre></td></tr></table></figure><h5 id="增删改查函数"><a href="#增删改查函数" class="headerlink" title="增删改查函数"></a>增删改查函数</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> manegeCookies = &#123;</span><br><span class="line"><span class="keyword">set</span>:function(key,value,expTime)&#123;</span><br><span class="line"><span class="built_in">document</span>.cookie = key + <span class="string">'='</span> + value + <span class="string">';max-age='</span> + expTime;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="keyword">delete</span>:<span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">this</span>.set[key,<span class="string">''</span>,<span class="number">-1</span>]</span><br><span class="line">&#125;,</span><br><span class="line"><span class="keyword">get</span>:function(key,callback)&#123;</span><br><span class="line"><span class="keyword">var</span> CookieArray = <span class="built_in">document</span>.cookie.split(<span class="string">'; '</span>);</span><br><span class="line">        CookieArray.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">elem,idx</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> CookieItemArray = elem.split(<span class="string">'='</span>);</span><br><span class="line">            <span class="keyword">if</span>(CookieItemArray[<span class="number">0</span>] == key) &#123;</span><br><span class="line">                callback(CookieItemArray[<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        callback(<span class="literal">undefined</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;,</span><br><span class="line">&#125;</span><br><span class="line">manegeCookies.set(<span class="string">'name'</span>,<span class="string">'leah'</span>,<span class="number">1000</span>);</span><br><span class="line">manegeCookies.delete(<span class="string">'name'</span>);</span><br><span class="line">manegeCookies.get(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="webstorage" scheme="http://yoursite.com/categories/webstorage/"/>
+    
+    
+      <category term="webstorage" scheme="http://yoursite.com/tags/webstorage/"/>
+    
+  </entry>
   
   <entry>
     <title>迭代器与生成器的应用</title>
@@ -535,34 +561,6 @@
       <category term="JS算法" scheme="http://yoursite.com/tags/JS%E7%AE%97%E6%B3%95/"/>
     
       <category term="prototype" scheme="http://yoursite.com/tags/prototype/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何把一个字符串的大小写取反</title>
-    <link href="http://yoursite.com/2020/07/22/06-%E5%A6%82%E4%BD%95%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99%E5%8F%96%E5%8F%8D/"/>
-    <id>http://yoursite.com/2020/07/22/06-%E5%A6%82%E4%BD%95%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99%E5%8F%96%E5%8F%8D/</id>
-    <published>2020-07-22T12:28:08.000Z</published>
-    <updated>2020-07-22T12:28:54.683Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="如何把一个字符串的大小写取反（大写变小写，小写变大写）"><a href="#如何把一个字符串的大小写取反（大写变小写，小写变大写）" class="headerlink" title="如何把一个字符串的大小写取反（大写变小写，小写变大写）"></a>如何把一个字符串的大小写取反（大写变小写，小写变大写）</h2><h4 id=""><a href="#" class="headerlink" title=""></a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let str &#x3D; &#39;hfubH就U观看dhHUd耳机的H日e就&#39;</span><br><span class="line">&#x2F;&#x2F; content:每次正则匹配的结果</span><br><span class="line">&#x2F;&#x2F;把字母转换为大写后判断是否和之前一样，若一样则要转小写</span><br><span class="line">&#x2F;&#x2F;或者在ASCII表中找大写字母的取值范围(65-90)进行判断charCodeAt</span><br><span class="line">str.replace(&#x2F;[a-zA-Z]&#x2F;g,content&#x3D;&gt;&#123;</span><br><span class="line">return content.toUpperCase() &#x3D;&#x3D;&#x3D; content? content.toLowerCase() : content.toUpperCase();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="JS算法" scheme="http://yoursite.com/categories/JS%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="JS算法" scheme="http://yoursite.com/tags/JS%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
