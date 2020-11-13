@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-09T08:41:48.869Z</updated>
+  <updated>2020-11-13T15:23:53.393Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>forEach、filte、rmap使用与重写</title>
+    <link href="http://yoursite.com/2020/11/10/31-forEachfiltermap%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%87%8D%E5%86%99/"/>
+    <id>http://yoursite.com/2020/11/10/31-forEachfiltermap%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%87%8D%E5%86%99/</id>
+    <published>2020-11-10T09:17:42.000Z</published>
+    <updated>2020-11-13T15:23:53.393Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>以下几个方法都是ES5环境下的</p><h2 id="forEach遍历"><a href="#forEach遍历" class="headerlink" title="forEach遍历"></a>forEach遍历</h2><p>forEach是在Array.prototype上的方法，该方法的调用者必须为数组</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.forEach(参数<span class="number">1</span>[每次遍历执行的fn],参数<span class="number">2</span>[fn的<span class="keyword">this</span>指向])</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">elem,index,array</span>)</span>&#123;</span><br><span class="line">oLi[index].innerHTML = elem.course;</span><br><span class="line">&#125;,&#123;<span class="attr">name</span>:<span class="string">'test'</span>&#125;)</span><br><span class="line"><span class="comment">//当第二个参数为原始值时，会强制进行包装类，因为this指向对象，而null和undefined不能包装类，所以this还是指向Window</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//升级版</span></span><br><span class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">elem,index,array</span>)</span>&#123;</span><br><span class="line"><span class="keyword">this</span>[index].innerHTML = elem.course;</span><br><span class="line">&#125;,oLi)</span><br></pre></td></tr></table></figure><h3 id="重写forEach"><a href="#重写forEach" class="headerlink" title="重写forEach"></a>重写forEach</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.myForEach = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">this</span>,</span><br><span class="line">len = arr.len,</span><br><span class="line">arg2 = <span class="built_in">arguments</span>[<span class="number">1</span>]||<span class="built_in">window</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">fn.apply(arg2,[arr[i],i,arr]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="filter过滤"><a href="#filter过滤" class="headerlink" title="filter过滤"></a>filter过滤</h2><p>是在Array.prototype上的方法，该方法的调用者必须为数组，<strong>返回一个新的数组</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArr = data.filter(参数<span class="number">1</span>[每次遍历执行的fn,添加<span class="keyword">return</span>为<span class="literal">true</span>的元素到新数组中],参数<span class="number">2</span>[fn的<span class="keyword">this</span>指向])</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArr = data.filter(<span class="function"><span class="keyword">function</span>(<span class="params">elem,index,array</span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> elem.is_free === <span class="string">'1'</span></span><br><span class="line">&#125;,&#123;<span class="attr">name</span>:<span class="string">'test'</span>&#125;)</span><br></pre></td></tr></table></figure><h3 id="重写filter"><a href="#重写filter" class="headerlink" title="重写filter"></a>重写filter</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.myFilter = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">this</span>,</span><br><span class="line">        len = arr.len,</span><br><span class="line">        arg2 = <span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span>,</span><br><span class="line">        newArr = [],</span><br><span class="line">        item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        item = deepclone(arr[i])</span><br><span class="line">        fn.apply(arg2, [arr[i], i, arr]) ? newArr.push(item) : <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newArr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="map映射"><a href="#map映射" class="headerlink" title="map映射"></a>map映射</h2><p>是在Array.prototype上的方法，该方法的调用者必须为数组，<strong>返回一个新的数组</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArr = data.map(参数<span class="number">1</span>[每次遍历执行的fn,添加<span class="keyword">return</span>指定值到新数组],参数<span class="number">2</span>[fn的<span class="keyword">this</span>指向])</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArr = data.map(<span class="function"><span class="keyword">function</span>(<span class="params">elem,index,array</span>)</span>&#123;</span><br><span class="line">elem.course = <span class="keyword">this</span>.name +elem.course;</span><br><span class="line"><span class="keyword">return</span> elem;</span><br><span class="line">&#125;,&#123;<span class="attr">name</span>:<span class="string">'test'</span>&#125;)</span><br></pre></td></tr></table></figure><h3 id="重写map"><a href="#重写map" class="headerlink" title="重写map"></a>重写map</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.myMap = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">this</span>,</span><br><span class="line">len = arr.length,</span><br><span class="line">arg2 = <span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span>,</span><br><span class="line">newArr = [],</span><br><span class="line">item;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">item = tools.deepclone(arr[i]);</span><br><span class="line">newArr.push(fn.apply(arg2,[arr[i],i,arr]););</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> newArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="ECMAscript" scheme="http://yoursite.com/categories/ECMAscript/"/>
+    
+    
+      <category term="ECMAscript" scheme="http://yoursite.com/tags/ECMAscript/"/>
+    
+  </entry>
   
   <entry>
     <title>vue.set()的使用</title>
@@ -533,32 +559,6 @@
     
     
       <category term="RegExp" scheme="http://yoursite.com/tags/RegExp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>flex是什么？flex：1表示什么？</title>
-    <link href="http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>http://yoursite.com/2020/07/24/12-flex%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fflex%EF%BC%9A1%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
-    <published>2020-07-24T14:36:56.000Z</published>
-    <updated>2020-07-25T15:37:57.639Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>flex是三个属性的缩写，分别是flex-grow、flex-shrink、flex-basis。</p><p><strong>flex-grow表示项目的放大比例</strong></p><p>:one:默认为0，即使存在剩余空间也不会放大</p><p>:two:所有项目的flex-grow为1时，等分剩余空间</p><p>:three:flex-row为n的项目，占据的空间（放大的比例）是flex-grow为1的n倍</p><h5 id="flex-shrink表示项目的缩小比例"><a href="#flex-shrink表示项目的缩小比例" class="headerlink" title="flex-shrink表示项目的缩小比例"></a><strong>flex-shrink表示项目的缩小比例</strong></h5><p>:one:默认为1，当空间不足时，项目会自动缩小</p><p>:two:flex-shrink为0时，空间不足，项目不会缩小</p><p>:three: flex-shrink为n的项目，空间不足时缩小的比例是flex-shrink为1的n倍</p><h5 id="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"><a href="#flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小" class="headerlink" title="flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小"></a><strong>flex-basis表示在分配剩余空间之前，项目所占据的主轴空间大小</strong></h5><p>:one:默认为auto，即项目本身的大小</p><p>:two:设置后项目将占据固定空间</p><p>所以flex属性的默认值为：0 1 auto （不放大会缩小）</p><p>  <strong>flex为none</strong>：0 0 auto  （不放大也不缩小）</p><p>  <strong>flex为auto</strong>：1 1 auto  （放大且缩小）</p><p>因此flex：1即为flex-grow：1，经常用作自适应布局，将父容器的display：flex，侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
     
   </entry>
   
