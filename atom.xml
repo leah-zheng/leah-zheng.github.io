@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-05T08:21:04.642Z</updated>
+  <updated>2020-12-09T15:08:10.702Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>buffer、编码方式</title>
+    <link href="http://yoursite.com/2020/11/30/36-buffer%E3%80%81%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2020/11/30/36-buffer%E3%80%81%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/</id>
+    <published>2020-11-30T11:15:32.000Z</published>
+    <updated>2020-12-09T15:08:10.702Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="buffer"><a href="#buffer" class="headerlink" title="buffer"></a>buffer</h2><p>当你要将一桶水移动到另一个人的桶中，可以直接将水桶中的水中的水倒入另一个桶中，也可以用杯子一杯一杯得舀水，直到全部的水装到另一个人的水桶中，一杯水的量就是流。</p><p>Buffer类用于操作TCP流、文件系统操作、以及其他上下文中与八位字节流进行交互。用于读取或操作二进制数据流的机制</p><p>8bit比特 ：1byte字节   1024byte：1kb    1024kb：1mb</p><h3 id="字符集与字符编码"><a href="#字符集与字符编码" class="headerlink" title="字符集与字符编码"></a>字符集与字符编码</h3><p>字符集：十进制数与字符一一对应的集合（unicode)</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">'test'</span>);</span><br><span class="line">cnosole.log(buf);</span><br><span class="line">node index <span class="comment">// &lt;buffer 74 65 73 74&gt; // 16位进制</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="number">74</span>,<span class="number">16</span>)) <span class="comment">// 转成10进制数 到ASSCII表上找对应的字母</span></span><br></pre></td></tr></table></figure><p>字符编码UTF-8  最多4个字节表示一个字符</p><p>字符编码UTF-16 2到4个字节表示一个字符 </p><p>字符编码UTF-32 4个字节表示一个字符</p><p>1、buffer操作二进制数据流</p><p>2、实例类似于整数（0-255 用16进制的方式）数组，大小是固定的</p><p>3、 node中的buffer不是通过javascript申请的，是node中C++层面实现的</p><h4 id="实例化Buffer"><a href="#实例化Buffer" class="headerlink" title="实例化Buffer"></a>实例化Buffer</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf1 = Buffer.alloc(<span class="number">10</span>，<span class="number">1</span>) <span class="comment">// 长度 数值 初始化</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.allocUnsafe(<span class="number">10</span>) <span class="comment">//长度10，未初始化随机的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])  </span><br><span class="line"><span class="comment">//&lt;Buffer 01 02 03&gt;</span></span><br></pre></td></tr></table></figure><p>iconv  icon-lite  Buffer编码方式</p><p>buf[index] 会将16进制转成10进制 </p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">'http://nodejs.cn/'</span>;</span><br><span class="line"><span class="keyword">const</span> buf = Buffer.allocUnsafe(str.length);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length;i++)&#123;</span><br><span class="line">buf[i] = str.charCodeAt(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'utf8'</span>));</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">'abc'</span>);</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; buf.length;i++)&#123;</span><br><span class="line">str +=<span class="built_in">String</span>.fromCodePoint(buf[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(str)</span><br></pre></td></tr></table></figure><h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = Buffer.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buf1 = Buffer.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(buf === buf1) <span class="comment">//false</span></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line"><span class="string">'0'</span>:<span class="number">1</span>,</span><br><span class="line"><span class="string">'1'</span>:<span class="number">2</span>,</span><br><span class="line">length:<span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> buf = Buffer.from(obj);</span><br><span class="line"><span class="built_in">console</span>.log(buf) <span class="comment">// &lt;Buffer 01 02 00 00 00&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf1 = Buffer.from(<span class="string">'this is a tést'</span>);</span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.from(<span class="string">'7468697320697320612074c3a97374'</span>, <span class="string">'hex'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(buf1.toString());</span><br><span class="line"><span class="comment">// 打印: this is a tést</span></span><br><span class="line"><span class="built_in">console</span>.log(buf2.toString());</span><br><span class="line"><span class="comment">// 打印: this is a tést</span></span><br><span class="line"><span class="built_in">console</span>.log(buf1.toString(<span class="string">'latin1'</span>));</span><br><span class="line"><span class="comment">// 打印: this is a tÃ©st</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Node.js" scheme="http://yoursite.com/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="http://yoursite.com/tags/Node-js/"/>
+    
+  </entry>
   
   <entry>
     <title>buffer、path</title>
@@ -537,32 +563,6 @@
       <category term="E6" scheme="http://yoursite.com/tags/E6/"/>
     
       <category term="async/await" scheme="http://yoursite.com/tags/async-await/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>判断输出代码的执行结果并解释为什么</title>
-    <link href="http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/"/>
-    <id>http://yoursite.com/2020/07/28/15-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B9%B6%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88/</id>
-    <published>2020-07-28T05:54:14.000Z</published>
-    <updated>2020-08-01T12:54:06.981Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; &#123;n:1&#125;;</span><br><span class="line">var b &#x3D; a ;</span><br><span class="line">a.x &#x3D; a &#x3D; &#123;n : 2&#125;</span><br><span class="line"></span><br><span class="line">console.log(a.x)</span><br><span class="line">console.log(b.x)</span><br></pre></td></tr></table></figure><h5 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h5><p>这道题的关键知识点是连等，首先我们要知道连等开始之前程序会把所有的引用都保存下来，连等的过程中，这些值是保持不变的，等到整个连等都完事了，再一块儿变。</p><p>这是我画的图解：</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/01/a3zXWD.png" alt=""></p><h5 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a.x)  &#x2F;&#x2F; undefined</span><br><span class="line">console.log(b.x)  &#x2F;&#x2F; x:&#123;n:2&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="连等" scheme="http://yoursite.com/categories/%E8%BF%9E%E7%AD%89/"/>
-    
-    
-      <category term="连等" scheme="http://yoursite.com/tags/%E8%BF%9E%E7%AD%89/"/>
     
   </entry>
   
