@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-09T15:08:10.702Z</updated>
+  <updated>2020-12-11T15:45:45.692Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>commonJS、后端的分层</title>
+    <link href="http://yoursite.com/2020/12/01/37-commonJS%20%E3%80%81%E5%90%8E%E7%AB%AF%E7%9A%84%E5%88%86%E5%B1%82/"/>
+    <id>http://yoursite.com/2020/12/01/37-commonJS%20%E3%80%81%E5%90%8E%E7%AB%AF%E7%9A%84%E5%88%86%E5%B1%82/</id>
+    <published>2020-12-01T07:43:21.000Z</published>
+    <updated>2020-12-11T15:45:45.692Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>后端分层</p><p>1、web层（controller）：权限校验、封装、用户提示</p><p>2、业务逻辑层（server层）：后端业务处理</p><p>3、DAO（data access object）：数据操作</p><p>4、持久层：数据库  关系型数据库（mySQL、Oracle、DB2）和非关系型数据库（mangoDB、redis、HBase）</p><p>commonjs规范</p><p>1、一个文件就是一个模块，拥有自己的作用域 （kiss原则）</p><p>2、 普通方式定义的变量、函数、对象，都属于模块内部（全局对象global）</p><p>3、require()</p><p>4、exports，module.exports</p><p>一个文件就是一个模块</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 模块导出</span></span><br><span class="line">modele.exports = &#123;</span><br><span class="line">    test,</span><br><span class="line">    a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">exports,require,module,__filename,__dirname</span>)</span>&#123;</span><br><span class="line">    exports = <span class="built_in">module</span>.exports;</span><br><span class="line"><span class="comment">//模块引入方式</span></span><br><span class="line">    <span class="comment">//1、文件模块</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'./index2.js'</span>) <span class="comment">//引入其他文件的代码同步执行</span></span><br><span class="line">    <span class="comment">// ./ 当前目录(相对目录)  /根目录(绝对目录)</span></span><br><span class="line">    <span class="comment">// 文件后缀名默认为js、json、node，都不是就报错</span></span><br><span class="line">    <span class="comment">//2、核心模块 node优化方式之一</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line">    <span class="comment">// 将引入的模块对象解构赋值</span></span><br><span class="line">    <span class="keyword">let</span> &#123;test,a&#125; = <span class="built_in">require</span>(<span class="string">'./index.js'</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure><p>require加载后会被<strong>缓存</strong>，多次引用只执行一次</p><p>循环依赖</p><p>main.js</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(./modA.js);</span><br><span class="line"><span class="built_in">require</span>(./modB.js);</span><br></pre></td></tr></table></figure><p>modA.js</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports.test = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">const</span> modB = <span class="built_in">require</span>(<span class="string">'./modB.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'modA:'</span>+modB.test);</span><br><span class="line"><span class="built_in">module</span>.exports.test = <span class="string">'aa'</span>;</span><br></pre></td></tr></table></figure><p>modB.js</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports.test = <span class="string">'b'</span>;</span><br><span class="line"><span class="keyword">const</span> modA = <span class="built_in">require</span>(<span class="string">'./modA.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'modB:'</span>+modA.test);</span><br><span class="line"><span class="built_in">module</span>.exports.test = <span class="string">'bb'</span>;</span><br></pre></td></tr></table></figure><p>只输出已经加载的部分，还未执行的部分不会执行</p><p>node main  </p><p>// modB：a</p><p>//modA：bb</p><p>引入核心模块输出文本</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;readFile&#125; = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">readFile(<span class="string">'./main.js'</span>,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line"><span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>引入npm上的模块 </p><p>chalk改变输出的样式</p><p>npm init</p><p>npm i chalk -D</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"><span class="comment">// node_module -&gt;chalk -&gt;package.json-&gt; main:'xxx'(没有的话默认index.js、index.json)-&gt;依次往上找node_module直到根目录，若没找到则抛出错误</span></span><br><span class="line"><span class="built_in">console</span>.log(chalk.red(<span class="string">'hello word'</span>));</span><br></pre></td></tr></table></figure><p>xxx.node   xxx.json   xxx.js </p><p>REPL（read eval print loop）交互式解释器</p><p>命令 node</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Node.js" scheme="http://yoursite.com/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="http://yoursite.com/tags/Node-js/"/>
+    
+  </entry>
   
   <entry>
     <title>buffer、编码方式</title>
@@ -529,40 +555,6 @@
       <category term="VUE" scheme="http://yoursite.com/tags/VUE/"/>
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>实现一个sleep函数</title>
-    <link href="http://yoursite.com/2020/07/29/17-%E5%AE%9E%E7%8E%B0sleep%E5%87%BD%E6%95%B0/"/>
-    <id>http://yoursite.com/2020/07/29/17-%E5%AE%9E%E7%8E%B0sleep%E5%87%BD%E6%95%B0/</id>
-    <published>2020-07-29T08:12:32.000Z</published>
-    <updated>2020-08-01T13:23:52.419Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实现一个sleep函数，比如sleep-1000-意味着等待1000毫秒，可以从Promise、Generator、Async-Await等角度实现。"><a href="#实现一个sleep函数，比如sleep-1000-意味着等待1000毫秒，可以从Promise、Generator、Async-Await等角度实现。" class="headerlink" title="实现一个sleep函数，比如sleep(1000)意味着等待1000毫秒，可以从Promise、Generator、Async/Await等角度实现。"></a>实现一个sleep函数，比如sleep(1000)意味着等待1000毫秒，可以从Promise、Generator、Async/Await等角度实现。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function sleep(ms) &#123;</span><br><span class="line">return new Promise(resolve&#x3D;&gt;&#123;</span><br><span class="line"> setInterval(resolve,ms)</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async()&#x3D;&gt;&#123;</span><br><span class="line">console.log(111)</span><br><span class="line">await sleep(2000)</span><br><span class="line">console.log(222)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="E6" scheme="http://yoursite.com/categories/E6/"/>
-    
-      <category term="Promise" scheme="http://yoursite.com/categories/E6/Promise/"/>
-    
-      <category term="async/await" scheme="http://yoursite.com/categories/E6/Promise/async-await/"/>
-    
-    
-      <category term="Promise" scheme="http://yoursite.com/tags/Promise/"/>
-    
-      <category term="E6" scheme="http://yoursite.com/tags/E6/"/>
-    
-      <category term="async/await" scheme="http://yoursite.com/tags/async-await/"/>
     
   </entry>
   
