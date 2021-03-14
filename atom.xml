@@ -481,10 +481,10 @@
   
   <entry>
     <title>webpack报错-Invalid configuration object...</title>
-    <link href="http://yoursite.com/2020/11/12/Invalid%20configuration%20object/"/>
-    <id>http://yoursite.com/2020/11/12/Invalid%20configuration%20object/</id>
-    <published>2020-11-12T06:11:42.000Z</published>
-    <updated>2020-11-14T15:19:40.381Z</updated>
+    <link href="http://yoursite.com/2020/11/16/Invalid%20configuration%20object/"/>
+    <id>http://yoursite.com/2020/11/16/Invalid%20configuration%20object/</id>
+    <published>2020-11-16T06:11:42.000Z</published>
+    <updated>2021-03-14T15:53:34.502Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>问题</strong>：webpack打包报错</p><p>![image-20201114231408267](C:\Users\Magic Book\AppData\Roaming\Typora\typora-user-images\image-20201114231408267.png)</p><p><strong>解决办法：</strong></p><p>报错信息中说配置模块中有一个未知的devServer属性。</p><p>检查webpack.config.js中的配置，发现devServer写在了module里，应该写在和module同级的位置，修改后重新打包，打包成功。</p>]]></content>
     
